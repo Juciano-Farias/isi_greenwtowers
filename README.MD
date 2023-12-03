@@ -1,5 +1,9 @@
 # Green Towers Web API
 
+<h2 align="center">
+  <img alt="Logo" src="./logo.jpg" />
+</h2>
+
 <h4 align="center"> 
 	🚧  🚀 Em construção...  🚧
 </h4>
@@ -57,6 +61,7 @@ $ docker-compose up -d
 As seguintes ferramentas estão sendo usadas na construção do projeto:
 
 - **[.NET Core 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**
+- **[Entity Framework](https://learn.microsoft.com/en-us/ef/)**
 - **[DDD](https://en.wikipedia.org/wiki/Domain-driven_design)**
 - **[Docker](https://www.docker.com/)**
 - **[PostgreSQL](https://www.postgresql.org/)**
