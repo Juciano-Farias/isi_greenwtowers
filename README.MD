@@ -1,0 +1,63 @@
+# Green Towers Web API
+
+<h4 align="center"> 
+	🚧  🚀 Em construção...  🚧
+</h4>
+
+<p align="center">
+ <a href="#-sobre-o-projeto">Sobre</a> •
+ <a href="#-layout">Layout</a> • 
+ <a href="#-como-executar-o-projeto">Como executar</a> • 
+ <a href="#-tecnologias">Tecnologias</a> • 
+</p>
+
+## 💻 Sobre o projeto
+
+O projeto Green Towers surge pela necessidade de uma aplicação que centralize a comunicação, necessidades e agendamentos entre os condôminos e o administrador do condomínio
+
+---
+
+## 🎨 Layout
+
+O layout da aplicação está disponível no Figma:
+
+<a href="https://www.figma.com/file/8dGv9queLnF8RUjZ2qmHBq/Sistema?t=ff4s6KgyZRwNuz6f-0">
+  <img alt="Layout da app" src="https://www.figma.com/file/Cx5744SNmQVbRGQlbtIanh/PDM%2FPA%2FISI?type=design&node-id=0-1&mode=design&t=gxIh3OESiIY59e71-0">
+</a>
+
+---
+
+## 🚀 Como executar o projeto
+
+### Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com), [Docker](https://nodejs.org/en/).
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+
+🧭 Rodando a aplicação web API
+
+```bash
+# Clone este repositório
+$ git clone <https://github.com/Juciano-Farias/PDM-PA-ISI.git>
+
+# Acesse a pasta do front end do projeto no terminal/cmd
+$ cd src
+
+# Instale as dependências
+$ docker-compose up -d
+
+# O servidor inciará na porta:8000 - acesse <http://localhost:8000/>
+```
+
+---
+
+## 🛠 Tecnologias
+
+As seguintes ferramentas estão sendo usadas na construção do projeto:
+
+- **[.NET Core 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**
+- **[DDD](https://en.wikipedia.org/wiki/Domain-driven_design)**
+- **[Docker](https://www.docker.com/)**
+- **[PostgreSQL](https://www.postgresql.org/)**
+- **[C#](https://learn.microsoft.com/en-us/dotnet/csharp/)**
