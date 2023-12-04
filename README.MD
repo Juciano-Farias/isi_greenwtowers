@@ -1,36 +1,3 @@
-# Green Towers Web API
-
-<h2 align="center">
-  <img alt="Logo" src="./logo.jpg" />
-</h2>
-
-<h4 align="center"> 
-	🚧  🚀 Em construção...  🚧
-</h4>
-
-<p align="center">
- <a href="#-sobre-o-projeto">Sobre</a> •
- <a href="#-layout">Layout</a> • 
- <a href="#-como-executar-o-projeto">Como executar</a> • 
- <a href="#-tecnologias">Tecnologias</a> • 
-</p>
-
-## 💻 Sobre o projeto
-
-O projeto Green Towers surge pela necessidade de uma aplicação que centralize a comunicação, necessidades e agendamentos entre os condôminos e o administrador do condomínio
-
----
-
-## 🎨 Layout
-
-O layout da aplicação está disponível no Figma:
-
-<a href="https://www.figma.com/file/8dGv9queLnF8RUjZ2qmHBq/Sistema?t=ff4s6KgyZRwNuz6f-0">
-  <img alt="Layout da app" src="https://www.figma.com/file/Cx5744SNmQVbRGQlbtIanh/PDM%2FPA%2FISI?type=design&node-id=0-1&mode=design&t=gxIh3OESiIY59e71-0">
-</a>
-
----
-
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/JZTLzScX)
 
 # Trabalho Prático II
@@ -66,6 +33,39 @@ mais informação
 [doc/](./doc/) documentação com o relatório
 
 [src/](./src/) código da solução desenvolvida
+
+# Green Towers Web API
+
+<h2 align="center">
+  <img alt="Logo" src="./logo.jpg" />
+</h2>
+
+<h4 align="center"> 
+	🚧  🚀 Em construção...  🚧
+</h4>
+
+<p align="center">
+ <a href="#-sobre-o-projeto">Sobre</a> •
+ <a href="#-layout">Layout</a> • 
+ <a href="#-como-executar-o-projeto">Como executar</a> • 
+ <a href="#-tecnologias">Tecnologias</a> • 
+</p>
+
+## 💻 Sobre o projeto
+
+O projeto Green Towers surge pela necessidade de uma aplicação que centralize a comunicação, necessidades e agendamentos entre os condôminos e o administrador do condomínio
+
+---
+
+## 🎨 Layout
+
+O layout da aplicação está disponível no Figma:
+
+<a href="https://www.figma.com/file/8dGv9queLnF8RUjZ2qmHBq/Sistema?t=ff4s6KgyZRwNuz6f-0">
+  <img alt="Layout da app" src="https://www.figma.com/file/Cx5744SNmQVbRGQlbtIanh/PDM%2FPA%2FISI?type=design&node-id=0-1&mode=design&t=gxIh3OESiIY59e71-0">
+</a>
+
+---
 
 ## 🚀 Como executar o projeto
 
