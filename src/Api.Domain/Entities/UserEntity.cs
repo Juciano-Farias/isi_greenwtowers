@@ -6,4 +6,5 @@ public class UserEntity : BaseEntity
     public string Email { get; set; }
     public DateTimeOffset Birth { get; set; }
     public string Floor { get; set; }
+    public string Password { get; set; }
 }

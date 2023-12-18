@@ -16,6 +16,7 @@ public class UserMap : IEntityTypeConfiguration<UserEntity>
         builder.Property(u => u.Email).IsRequired().HasMaxLength(100);
         builder.Property(u => u.Birth).HasMaxLength(40);
         builder.Property(u => u.Floor).IsRequired().HasMaxLength(60);
+        builder.Property(u => u.Password).IsRequired().HasMaxLength(255);
     }
 }
 
