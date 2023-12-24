@@ -6,12 +6,12 @@ using Api.Domain.Entities;
 
 namespace Api.Domain.Interfaces.Services.User
 {
-    public interface UserService
+    public interface IUserService
     {
         Task<UserEntity> Get(Guid id);
         Task<List<UserEntity>> GetAll();
         Task<UserEntity> Post(UserEntity user);
         Task<UserEntity> Put(UserEntity user);
-        Task<UserEntity> Delete(UserEntity user);
+        Task<bool> Delete(UserEntity user);
     }
 }
