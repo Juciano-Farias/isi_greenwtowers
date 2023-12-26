@@ -45,6 +45,7 @@ namespace Api.Data.Repository
                     item.Id = Guid.NewGuid();
                 }
                 item.CreateAt = DateTime.UtcNow;
+                item.UpdateAt = null;
                 _dataset.Add(item);
 
                 await _context.SaveChangesAsync();

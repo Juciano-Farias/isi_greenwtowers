@@ -15,6 +15,6 @@ public class BaseEntity
         set { _createAt = (value == null ? DateTime.UtcNow : value); }
     }
 
-    public DateTime UpdateAt { get; set; }
+    public DateTime? UpdateAt { get; set; }
 
 }
