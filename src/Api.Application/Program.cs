@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+ConfigureService.ConfigureDependenciesService(builder.Services);
+ConfigureRepository.ConfigureDependenciesRepository(builder.Services);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
 {
@@ -25,9 +28,6 @@ builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
         Url = new Uri("https://github.com/Juciano-Farias")
     }
 }));
-
-ConfigureService.ConfigureDependenciesService(builder.Services);
-ConfigureRepository.ConfigureDependenciesRepository(builder.Services);
 
 builder.Services.AddControllers();
 
