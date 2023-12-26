@@ -1,12 +1,30 @@
 using Api.CrossCutting.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
+{
+    Version = "v1",
+    Title = "API para a aplicação Green Towers.",
+    Description = "O projeto Green Towers surge pela necessidade de uma aplicação que centralize a comunicação, necessidades e agendamentos entre os condôminos e o administrador do condomínio. Esta API servirá para o mencionado propósito.",
+    TermsOfService = new Uri("https://github.com/Juciano-Farias"),
+    Contact = new OpenApiContact
+    {
+        Name = "Juciano Gomes Farias Junior",
+        Email = "jucianogfjr@gmail.com",
+        Url = new Uri("https://jucianofarias.vercel.app/"),
+    },
+    License = new OpenApiLicense
+    {
+        Name = "Termo de Licença de Uso",
+        Url = new Uri("https://github.com/Juciano-Farias")
+    }
+}));
 
 ConfigureService.ConfigureDependenciesService(builder.Services);
 ConfigureRepository.ConfigureDependenciesRepository(builder.Services);
@@ -19,34 +37,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API para a aplicação Green Towers.");
+        c.RoutePrefix = string.Empty;
+    });
 }
 
 app.MapControllers();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
