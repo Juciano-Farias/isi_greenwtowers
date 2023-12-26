@@ -12,6 +12,6 @@ namespace Api.Domain.Interfaces.Services.User
         Task<List<UserEntity>> GetAll();
         Task<UserEntity> Post(UserEntity user);
         Task<UserEntity> Put(UserEntity user);
-        Task<bool> Delete(UserEntity user);
+        Task<bool> Delete(Guid id);
     }
 }

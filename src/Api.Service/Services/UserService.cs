@@ -15,9 +15,9 @@ namespace Api.Service.Services
         {
             _repository = repository;
         }
-        public async Task<bool> Delete(UserEntity user)
+        public async Task<bool> Delete(Guid id)
         {
-            return await _repository.DeleteAsync(user.Id);
+            return await _repository.DeleteAsync(id);
         }
 
         public async Task<UserEntity> Get(Guid id)
