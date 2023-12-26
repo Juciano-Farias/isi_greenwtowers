@@ -62,7 +62,7 @@ O projeto Green Towers surge pela necessidade de uma aplicação que centralize 
 O layout da aplicação está disponível no Figma:
 
 <a href="https://www.figma.com/file/8dGv9queLnF8RUjZ2qmHBq/Sistema?t=ff4s6KgyZRwNuz6f-0">
-  <img alt="Layout da app" src="https://www.figma.com/file/Cx5744SNmQVbRGQlbtIanh/PDM%2FPA%2FISI?type=design&node-id=0-1&mode=design&t=gxIh3OESiIY59e71-0">
+  <img alt="Layout da app" src="https://www.figma.com/file/Cx5744SNmQVbRGQlbtIanh/PDM%2FPA%2FISI?type=design&node-id=0-1&mode=design&t=YKZrpdvGt0E3AMg4-0">
 </a>
 
 ---
@@ -81,13 +81,25 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 # Clone este repositório
 $ git clone <https://github.com/Juciano-Farias/PDM-PA-ISI.git>
 
-# Acesse a pasta do front end do projeto no terminal/cmd
-$ cd src
-
-# Instale as dependências
+# Suba o container
 $ docker-compose up -d
 
-# O servidor inciará na porta:8000 - acesse <http://localhost:8000/>
+# Acesse a pasta da webapi
+$ cd src
+
+# Aplique as migrations
+$ cd ./Api.Data/
+$ dotnet ef database update
+$ cd ..
+
+# Execute a build
+$ dotnet build
+
+# Execute a webapi
+$ cd ./Api.Application/
+$ dotnet run
+
+# O servidor inciará na porta:5159 - acesse <http://localhost:5159/>
 ```
 
 ---
