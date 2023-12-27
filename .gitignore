@@ -7,7 +7,7 @@
 
 # dotenv files
 .env
-/volumes
+/GreenTowers/volumes
 
 # User-specific files
 *.rsuser
