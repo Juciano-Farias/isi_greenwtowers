@@ -6,6 +6,11 @@ namespace GreenTowers.Data
 {
     public class ApplicationDbContext : DbContext
     {
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    : base(options)
+        {
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Visitor> Visitors { get; set; }
@@ -13,7 +18,7 @@ namespace GreenTowers.Data
         public DbSet<GlobalWarning> GlobalWarnigns { get; set; }
         public DbSet<CommonArea> CommonAreas { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<Floor> Floors { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

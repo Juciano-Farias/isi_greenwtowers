@@ -37,8 +37,10 @@ namespace GreenTowers.Controllers
             // Crie um novo usuário
             var newUser = new User
             {
+                Name = userRegisterDto.Name,
                 Email = userRegisterDto.Email,
                 Password = HashPassword(userRegisterDto.Password), // Use uma função para hashear a senha
+                Floor = userRegisterDto.Floor,
                 Role = userRegisterDto.Role // Defina o role padrão como User
             };
 
@@ -103,7 +105,12 @@ namespace GreenTowers.Controllers
         [EmailAddress]
         public string Email { get; set; }
         [Required]
+        public string Name { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
+        public string Floor { get; set; }
+
         [Required]
         public Role Role { get; set; }
     }

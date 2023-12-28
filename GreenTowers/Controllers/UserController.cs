@@ -20,7 +20,6 @@ namespace GreenTowers.Controllers
         }
 
         [HttpGet]
-
         public async Task<ActionResult<IEnumerable<UserReadDto>>> GetUsers()
         {
             var users = await _context.Users

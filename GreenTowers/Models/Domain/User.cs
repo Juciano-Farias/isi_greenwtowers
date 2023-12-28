@@ -19,9 +19,9 @@ namespace GreenTowers.Models.Domain
         [Required]
         [StringLength(255)]
         public string Password { get; set; }
-        public int FloorId { get; set; }
-        [ForeignKey("FloorId")]
-        public Floor Floor { get; set; }
+        [Required]
+        [StringLength(60)]
+        public string Floor { get; set; }
 
         public DateTime Birth { get; set; }
 

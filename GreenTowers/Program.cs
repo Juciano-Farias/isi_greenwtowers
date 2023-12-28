@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using GreenTowers.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +17,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = false, 
-        ValidateAudience = false, 
-        ValidateLifetime = true, 
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
@@ -30,8 +32,8 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "API para a aplicação Green Towers.",
-        Description = "O projeto Green Towers surge pela necessidade de uma aplicação que centralize a comunicação, necessidades e agendamentos entre os condôminos e o administrador do condomínio. Esta API servirá para o mencionado propósito.",
+        Title = "API para a aplicaï¿½ï¿½o Green Towers.",
+        Description = "O projeto Green Towers surge pela necessidade de uma aplicaï¿½ï¿½o que centralize a comunicaï¿½ï¿½o, necessidades e agendamentos entre os condï¿½minos e o administrador do condomï¿½nio. Esta API servirï¿½ para o mencionado propï¿½sito.",
         TermsOfService = new Uri("https://github.com/Juciano-Farias"),
         Contact = new OpenApiContact
         {
@@ -41,12 +43,12 @@ builder.Services.AddSwaggerGen(c =>
         },
         License = new OpenApiLicense
         {
-            Name = "Termo de Licença de Uso",
+            Name = "Termo de Licenï¿½a de Uso",
             Url = new Uri("https://github.com/Juciano-Farias")
         }
     });
 
-    // Configuração para JWT no Swagger
+    // Configuraï¿½ï¿½o para JWT no Swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme (Example: 'Bearer 12345abcdef')",
@@ -71,6 +73,9 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Host=localhost;Port=5434;Database=pa;Username=postgres;Password=postgres")));
 
 var app = builder.Build();
 
