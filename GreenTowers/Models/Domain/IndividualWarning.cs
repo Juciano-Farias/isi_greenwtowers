@@ -7,6 +7,8 @@ namespace GreenTowers.Models.Domain
     {
         public int Id { get; set; }
         [Required]
+        public string Title { get; set; }
+        [Required]
         [StringLength(500)]
         public string Description { get; set; }
         [Required]
