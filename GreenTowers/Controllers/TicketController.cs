@@ -18,15 +18,15 @@ namespace GreenTowers.Controllers
         }
         // GET: api/Ticket
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets()
         {
-            return await _context.Tickets.ToListAsync();
+            return Ok(await _context.Tickets.ToListAsync());
         }
 
         // GET: api/Ticket/5
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
         {
             var ticket = await _context.Tickets.FindAsync(id);
@@ -41,30 +41,50 @@ namespace GreenTowers.Controllers
 
         // POST: api/Ticket
         [HttpPost]
-        [Authorize]
-        public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
+        [Authorize(Roles = "User")]
+        public async Task<ActionResult<Ticket>> PostTicket(TicketCreateDto ticketDto)
         {
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "UserId");
+            if (userIdClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var userId = int.Parse(userIdClaim.Value);
+
+            var ticket = new Ticket
+            {
+                Name = ticketDto.Name,
+                Description = ticketDto.Description,
+                UserId = userId
+            };
+
             _context.Tickets.Add(ticket);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTicket", new { id = ticket.Id }, ticket);
+            // Retorna o ticket criado com o status HTTP 201 (Created)
+            return CreatedAtAction(nameof(GetTicket), new { id = ticket.Id }, ticket);
         }
 
         // PUT: api/Ticket/5
         [HttpPut("{id}")]
-        [Authorize]
-        public async Task<IActionResult> PutTicket(int id, Ticket ticket)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> PutTicket(int id, TicketUpdateDto TicketUpdateDto)
         {
-            if (id != ticket.Id)
+            if (!TicketExists(id))
             {
                 return BadRequest();
             }
 
-            _context.Entry(ticket).State = EntityState.Modified;
-
             try
             {
+                var ticket = await _context.Tickets.FindAsync(id);
+
+                ticket.Name = TicketUpdateDto.Name;
+                ticket.Description = TicketUpdateDto.Description;
+                ticket.Reply = TicketUpdateDto.Reply;
                 await _context.SaveChangesAsync();
+                return Ok(TicketUpdateDto);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,7 +98,6 @@ namespace GreenTowers.Controllers
                 }
             }
 
-            return NoContent();
         }
 
         // DELETE: api/Ticket/5
@@ -95,7 +114,7 @@ namespace GreenTowers.Controllers
             _context.Tickets.Remove(ticket);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Ticket removido com sucesso.");
         }
 
         private bool TicketExists(int id)

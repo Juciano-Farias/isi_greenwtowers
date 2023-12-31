@@ -9,7 +9,6 @@ namespace GreenTowers.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -20,14 +19,18 @@ namespace GreenTowers.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<UserReadDto>>> GetUsers()
         {
             var users = await _context.Users
                 .Select(u => new UserReadDto
                 {
                     Id = u.Id,
-                    Email = u.Email
-                    // Mapear outros campos conforme necessário
+                    Email = u.Email,
+                    Name = u.Name,
+                    Floor = u.Floor,
+                    Birth = u.Birth,
+                    Role = u.Role
                 })
                 .ToListAsync();
 
@@ -35,7 +38,6 @@ namespace GreenTowers.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "User")] // Permite que qualquer usuário autenticado possa acessar este método
         public async Task<ActionResult<UserReadDto>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -48,14 +50,17 @@ namespace GreenTowers.Controllers
             return new UserReadDto
             {
                 Id = user.Id,
-                Email = user.Email
-                // Mapear outros campos conforme necessário
+                Email = user.Email,
+                Name = user.Name,
+                Floor = user.Floor,
+                Birth = user.Birth,
+                Role = user.Role
             };
         }
 
         // PUT: api/User/5
         [HttpPut("{id}")]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> PutUser(int id, UserUpdateDto userUpdateDto)
         {
             if (!UserExists(id))
@@ -64,36 +69,39 @@ namespace GreenTowers.Controllers
             }
 
             var user = await _context.Users.FindAsync(id);
-            user.Email = userUpdateDto.Email;
-            // Atualizar outros campos conforme necessário
 
-            _context.Entry(user).State = EntityState.Modified;
+            user.Email = userUpdateDto.Email;
+            user.Name = userUpdateDto.Name;
+            user.Floor = userUpdateDto.Floor;
+            user.Birth = userUpdateDto.Birth.ToUniversalTime();
+            user.Role = userUpdateDto.Role;
+
             try
             {
                 await _context.SaveChangesAsync();
+                return Ok(userUpdateDto);
             }
             catch (DbUpdateConcurrencyException)
             {
-                throw;
+                return BadRequest();
             }
-
-            return NoContent();
         }
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("Usuário não encontrado.");
             }
 
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Usuário excluído com sucesso.");
         }
 
         private bool UserExists(int id)
@@ -105,8 +113,11 @@ namespace GreenTowers.Controllers
     public class UserReadDto
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string Email { get; set; }
-        // Incluir outros campos conforme necessário, excluindo a senha
+        public string Floor { get; set; }
+        public DateTime Birth { get; set; }
+        public Role Role { get; set; }
     }
 
     public class UserCreateDto
@@ -117,8 +128,14 @@ namespace GreenTowers.Controllers
 
         [Required]
         public string Password { get; set; }
+        [Required]
+        public string Floor { get; set; }
+        [Required]
+        public string Name { get; set; }
+        public DateTime Birth { get; set; }
+        [Required]
+        public Role Role { get; set; }
 
-        // Incluir outros campos conforme necessário
     }
     public class UserUpdateDto
     {
@@ -126,7 +143,9 @@ namespace GreenTowers.Controllers
         [EmailAddress]
         public string Email { get; set; }
 
-        // Não inclua a senha aqui se você quiser que ela seja atualizada em um processo separado
-        // Incluir outros campos conforme necessário
+        public string Name { get; set; }
+        public string Floor { get; set; }
+        public DateTime Birth { get; set; }
+        public Role Role { get; set; }
     }
 }

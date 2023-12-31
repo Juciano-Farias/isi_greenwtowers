@@ -29,19 +29,19 @@ namespace GreenTowers.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userRegisterDto)
         {
-            // Verifique se o usuário já existe
-            var userExists = await _context.Users.AnyAsync(u => u.Email == userRegisterDto.Email);
+            var userExists = await _context.Users.AnyAsync(u => u.Email == userRegisterDto.Email || u.Name == userRegisterDto.Name);
             if (userExists)
-                return BadRequest("Usuário já existe.");
+                return BadRequest("Usuário já existe. Nome ou E-mail já cadastrado");
 
             // Crie um novo usuário
             var newUser = new User
             {
                 Name = userRegisterDto.Name,
                 Email = userRegisterDto.Email,
-                Password = HashPassword(userRegisterDto.Password), // Use uma função para hashear a senha
+                Password = HashPassword(userRegisterDto.Password),
+                Birth = userRegisterDto.Birth.ToUniversalTime(),
                 Floor = userRegisterDto.Floor,
-                Role = userRegisterDto.Role // Defina o role padrão como User
+                Role = userRegisterDto.Role
             };
 
             await _context.Users.AddAsync(newUser);
@@ -74,6 +74,8 @@ namespace GreenTowers.Controllers
             {
             new Claim(JwtRegisteredClaimNames.Sub, user.Email),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim("UserName", user.Name),
+            new Claim("UserId", user.Id.ToString()),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         };
 
@@ -81,7 +83,7 @@ namespace GreenTowers.Controllers
                 _configuration["Jwt:Issuer"],
                 _configuration["Jwt:Audience"],
                 claims,
-                expires: DateTime.UtcNow.AddHours(8),
+                expires: DateTime.UtcNow.AddDays(30),
                 signingCredentials: credentials
             );
 
@@ -108,6 +110,7 @@ namespace GreenTowers.Controllers
         public string Name { get; set; }
         [Required]
         public string Password { get; set; }
+        public DateTime Birth { get; set; }
         [Required]
         public string Floor { get; set; }
 
