@@ -3,6 +3,7 @@ using System;
 using GreenTowers.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GreenTowers.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231231151135_BaseModel")]
+    partial class BaseModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,6 +138,10 @@ namespace GreenTowers.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CommonAreaId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Schedules");
                 });
 
@@ -247,6 +254,25 @@ namespace GreenTowers.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Visitors");
+                });
+
+            modelBuilder.Entity("GreenTowers.Models.Domain.Schedule", b =>
+                {
+                    b.HasOne("GreenTowers.Models.Domain.CommonArea", "CommonArea")
+                        .WithMany()
+                        .HasForeignKey("CommonAreaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GreenTowers.Models.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CommonArea");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GreenTowers.Models.Domain.Visitor", b =>

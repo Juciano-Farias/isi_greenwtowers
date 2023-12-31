@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GreenTowers.Models.Domain
 {
-    public class GlobalWarning
+    public class GlobalWarning : BaseModel
     {
         public int Id { get; set; }
         [Required]

@@ -30,7 +30,9 @@ namespace GreenTowers.Controllers
                     Name = u.Name,
                     Floor = u.Floor,
                     Birth = u.Birth,
-                    Role = u.Role
+                    Role = u.Role,
+                    CreatedAt = u.CreatedAt,
+                    UpdatedAt = u.UpdatedAt,
                 })
                 .ToListAsync();
 
@@ -75,6 +77,7 @@ namespace GreenTowers.Controllers
             user.Floor = userUpdateDto.Floor;
             user.Birth = userUpdateDto.Birth.ToUniversalTime();
             user.Role = userUpdateDto.Role;
+            user.UpdatedAt = DateTime.UtcNow;
 
             try
             {
@@ -117,6 +120,8 @@ namespace GreenTowers.Controllers
         public string Email { get; set; }
         public string Floor { get; set; }
         public DateTime Birth { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public Role Role { get; set; }
     }
 

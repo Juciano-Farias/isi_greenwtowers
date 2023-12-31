@@ -39,6 +39,26 @@ namespace GreenTowers.Controllers
             return ticket;
         }
 
+        [HttpGet("my")]
+        [Authorize(Roles = "User")]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetUserTickets()
+        {
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "UserId");
+            if (userIdClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var userId = int.Parse(userIdClaim.Value);
+
+            var tickets = await _context.Tickets
+                                        .Where(t => t.UserId == userId)
+                                        .ToListAsync();
+
+            return Ok(tickets);
+        }
+
+
         // POST: api/Ticket
         [HttpPost]
         [Authorize(Roles = "User")]
@@ -83,6 +103,7 @@ namespace GreenTowers.Controllers
                 ticket.Name = TicketUpdateDto.Name;
                 ticket.Description = TicketUpdateDto.Description;
                 ticket.Reply = TicketUpdateDto.Reply;
+                ticket.UpdatedAt = DateTime.UtcNow;
                 await _context.SaveChangesAsync();
                 return Ok(TicketUpdateDto);
             }

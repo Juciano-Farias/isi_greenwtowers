@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GreenTowers.Models.Domain
 {
-    public class Visitor
+    public class Visitor : BaseModel
     {
         public int Id { get; set; }
         [Required]

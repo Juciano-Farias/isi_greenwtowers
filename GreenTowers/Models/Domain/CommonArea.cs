@@ -2,7 +2,7 @@
 
 namespace GreenTowers.Models.Domain
 {
-    public class CommonArea
+    public class CommonArea : BaseModel
     {
         public int Id { get; set; }
         [Required]

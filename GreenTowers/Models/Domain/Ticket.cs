@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace GreenTowers.Models.Domain
 {
-    public class Ticket
+    public class Ticket : BaseModel
     {
         public int Id { get; set; }
         [Required]

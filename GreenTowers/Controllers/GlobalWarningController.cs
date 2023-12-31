@@ -74,6 +74,7 @@ namespace GreenTowers.Controllers
 
             warning.Title = warningDto.Title;
             warning.Description = warningDto.Description;
+            warning.UpdatedAt = DateTime.UtcNow;
 
             try
             {

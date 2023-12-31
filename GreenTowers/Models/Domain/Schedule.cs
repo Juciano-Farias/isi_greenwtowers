@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GreenTowers.Models.Domain
 {
-    public class Schedule
+    public class Schedule : BaseModel
     {
         public int Id { get; set; }
 
@@ -17,10 +17,8 @@ namespace GreenTowers.Models.Domain
         [ForeignKey("UserId")]
         public int UserId { get; set; }
 
-        public User User { get; set; }
 
-        [ForeignKey ("CommonAreaId")]
+        [ForeignKey("CommonAreaId")]
         public int CommonAreaId { get; set; }
-        public CommonArea CommonArea { get; set; }
     }
 }
