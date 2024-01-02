@@ -7,12 +7,13 @@ namespace GreenTowers.Models.Domain
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Name { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
+        [Required]
+        public bool Available { get; set; }
+        [Required]
+        public bool Canceled { get; set; }
 
         [ForeignKey("UserId")]
         public int UserId { get; set; }
