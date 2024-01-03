@@ -10,9 +10,8 @@ namespace GreenTowers.Models.Domain
         [StringLength(100)]
         public string Name { get; set; }
         public DateTime VisitDate { get; set; }
-        public int UserId { get; set; }
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public int UserId { get; set; }
     }
 
 }
