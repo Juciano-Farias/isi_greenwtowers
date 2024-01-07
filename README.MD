@@ -81,6 +81,9 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 # Clone este repositório
 $ git clone <https://github.com/Juciano-Farias/PDM-PA-ISI.git>
 
+# Entre na pasta do proejto
+$ cd './GreenTowers'
+
 # Suba o container
 $ docker-compose up -d
 
