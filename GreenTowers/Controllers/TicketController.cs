@@ -16,7 +16,6 @@ namespace GreenTowers.Controllers
         {
             _context = context;
         }
-        // GET: api/Ticket
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets()
@@ -24,7 +23,6 @@ namespace GreenTowers.Controllers
             return Ok(await _context.Tickets.ToListAsync());
         }
 
-        // GET: api/Ticket/5
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
@@ -59,7 +57,6 @@ namespace GreenTowers.Controllers
         }
 
 
-        // POST: api/Ticket
         [HttpPost]
         [Authorize(Roles = "User")]
         public async Task<ActionResult<Ticket>> PostTicket(TicketCreateDto ticketDto)
@@ -82,11 +79,9 @@ namespace GreenTowers.Controllers
             _context.Tickets.Add(ticket);
             await _context.SaveChangesAsync();
 
-            // Retorna o ticket criado com o status HTTP 201 (Created)
             return CreatedAtAction(nameof(GetTicket), new { id = ticket.Id }, ticket);
         }
 
-        // PUT: api/Ticket/5
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutTicket(int id, TicketUpdateDto TicketUpdateDto)
@@ -121,7 +116,6 @@ namespace GreenTowers.Controllers
 
         }
 
-        // DELETE: api/Ticket/5
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> DeleteTicket(int id)

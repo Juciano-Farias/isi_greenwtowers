@@ -60,7 +60,6 @@ namespace GreenTowers.Controllers
             };
         }
 
-        // PUT: api/User/5
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> PutUser(int id, UserUpdateDto userUpdateDto)
@@ -90,7 +89,6 @@ namespace GreenTowers.Controllers
             }
         }
 
-        // DELETE: api/User/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> DeleteUser(int id)

@@ -19,7 +19,6 @@ namespace GreenTowers.Controllers
             _context = context;
         }
 
-        // GET: api/IndividualWarning
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<IndividualWarning>>> GetIndividualWarnigns()
@@ -27,7 +26,6 @@ namespace GreenTowers.Controllers
             return await _context.IndividualWarnigns.ToListAsync();
         }
 
-        // GET: api/IndividualWarning/5
         [HttpGet("{id}")]
         [Authorize]
         public async Task<ActionResult<IndividualWarning>> GetIndividualWarning(int id)
@@ -80,7 +78,6 @@ namespace GreenTowers.Controllers
             return CreatedAtAction("GetIndividualWarning", new { id = warning.Id }, warning);
         }
 
-        // PUT: api/IndividualWarning/5
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutIndividualWarning(int id, IndividualWarningUpdateDto warningDto)
@@ -115,7 +112,6 @@ namespace GreenTowers.Controllers
             return Ok(warning);
         }
 
-        // DELETE: api/IndividualWarning/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteIndividualWarning(int id)
@@ -158,7 +154,6 @@ namespace GreenTowers.Controllers
         [Required]
         public int UserId { get; set; }
 
-        // Normalmente, UserId não é incluído no DTO de atualização,
-        // a menos que a atualização permita mudar o usuário associado ao aviso.
+
     }
 }
