@@ -83,7 +83,7 @@ namespace GreenTowers.Controllers
                                               Floor = u.Floor,
                                               Birth = u.Birth,
                                               Role = u.Role,
-                                              UpdateAt = u.UpdatedAt,
+                                              UpdatedAt = u.UpdatedAt,
                                               CreatedAt = u.CreatedAt
                                           })
                                           .SingleOrDefaultAsync();
