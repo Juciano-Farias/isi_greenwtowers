@@ -63,7 +63,7 @@ namespace GreenTowers.Controllers
 
         [HttpGet("my")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<User>>> GetUserByToken()
+        public async Task<ActionResult<User>> GetUserByToken()
         {
             var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "UserId");
             if (userIdClaim == null)
@@ -86,7 +86,7 @@ namespace GreenTowers.Controllers
                                               UpdateAt = u.UpdatedAt,
                                               CreatedAt = u.CreatedAt
                                           })
-                                          .ToListAsync();
+                                          .SingleOrDefaultAsync();
 
             return Ok(users);
         }
