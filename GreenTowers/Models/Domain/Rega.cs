@@ -13,7 +13,6 @@ namespace GreenTowers.Models.Domain
 
         [Required]
         public DateTime InitialDate { get; set; }
-        [Required]
         public DateTime EndDate { get; set; }
         [Required]
         [StringLength(100)]

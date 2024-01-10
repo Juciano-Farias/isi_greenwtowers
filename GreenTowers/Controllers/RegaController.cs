@@ -61,5 +61,34 @@ namespace GreenTowers.Controllers
 
             return Ok(rega);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Rega>> PostRega(RegaCreateDto regaDto)
+        {
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "UserId");
+            if (userIdClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var userId = int.Parse(userIdClaim.Value);
+            var rega = new Rega
+            {
+                InitialDate = DateTime.UtcNow,
+                UserId = userId,
+                Temperature = regaDto.Temperature,
+            };
+
+            _context.Regas.Add(rega);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRega", new { id = rega.Id }, rega);
+        }
+
+        public class RegaCreateDto
+        {
+            [StringLength(100)]
+            public string? Temperature { get; set; }
+        }
     }
 }
