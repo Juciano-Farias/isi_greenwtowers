@@ -18,6 +18,7 @@ namespace GreenTowers.Data
         public DbSet<GlobalWarning> GlobalWarnigns { get; set; }
         public DbSet<CommonArea> CommonAreas { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Rega> Regas { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -13,6 +13,7 @@ namespace GreenTowers.Models.Domain
         public string Description { get; set; }
         [ForeignKey("UserId")]
         public int UserId { get; set; }
+        public User? User { get; set; }
     }
 
 }

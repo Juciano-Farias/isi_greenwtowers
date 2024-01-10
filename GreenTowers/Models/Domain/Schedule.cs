@@ -18,8 +18,12 @@ namespace GreenTowers.Models.Domain
         [ForeignKey("UserId")]
         public int UserId { get; set; }
 
+        public User? User { get; set; }
+
 
         [ForeignKey("CommonAreaId")]
         public int CommonAreaId { get; set; }
+
+        public CommonArea? CommonArea { get; set; }
     }
 }

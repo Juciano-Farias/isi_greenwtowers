@@ -86,8 +86,7 @@ namespace GreenTowers.Controllers
 
             var conflictingReservation = _context.Schedules.Any(s =>
                 s.CommonAreaId == createScheduleDTO.CommonAreaId &&
-                s.Date == createScheduleDTO.Date &&
-                s.UserId != userId);
+                s.Date == createScheduleDTO.Date);
 
             if (conflictingReservation)
             {
