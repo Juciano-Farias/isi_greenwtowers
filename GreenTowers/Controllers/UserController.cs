@@ -40,6 +40,7 @@ namespace GreenTowers.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<UserReadDto>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -58,6 +59,36 @@ namespace GreenTowers.Controllers
                 Birth = user.Birth,
                 Role = user.Role
             };
+        }
+
+        [HttpGet("my")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<User>>> GetUserByToken()
+        {
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "UserId");
+            if (userIdClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            var userId = int.Parse(userIdClaim.Value);
+
+            var users = await _context.Users
+                                          .Where(u => u.Id == userId)
+                                          .Select(u => new
+                                          {
+                                              Id = u.Id,
+                                              Name = u.Name,
+                                              Email = u.Email,
+                                              Floor = u.Floor,
+                                              Birth = u.Birth,
+                                              Role = u.Role,
+                                              UpdateAt = u.UpdatedAt,
+                                              CreatedAt = u.CreatedAt
+                                          })
+                                          .ToListAsync();
+
+            return Ok(users);
         }
 
         [HttpPut("{id}")]
