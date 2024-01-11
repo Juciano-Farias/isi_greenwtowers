@@ -19,7 +19,7 @@ namespace GreenTowers.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Rec")]
         public async Task<ActionResult<IEnumerable<UserReadDto>>> GetUsers()
         {
             var users = await _context.Users
