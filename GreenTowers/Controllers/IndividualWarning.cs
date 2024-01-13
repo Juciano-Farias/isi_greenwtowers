@@ -20,7 +20,7 @@ namespace GreenTowers.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Rec")]
         public async Task<ActionResult<IEnumerable<IndividualWarning>>> GetIndividualWarnigns()
         {
             return await _context.IndividualWarnigns.ToListAsync();
@@ -62,7 +62,7 @@ namespace GreenTowers.Controllers
 
         // POST: api/IndividualWarning
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Rec")]
         public async Task<ActionResult<IndividualWarning>> PostIndividualWarning(IndividualWarningCreateDto warningDto)
         {
             var warning = new IndividualWarning
