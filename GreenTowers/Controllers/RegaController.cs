@@ -75,7 +75,6 @@ namespace GreenTowers.Controllers
             var rega = new Rega
             {
                 InitialDate = DateTime.UtcNow,
-                EndDate = regaDto.EndDate.ToUniversalTime(),
                 UserId = userId,
                 Temperature = regaDto.Temperature,
             };
@@ -90,7 +89,6 @@ namespace GreenTowers.Controllers
         {
             [StringLength(100)]
             public string? Temperature { get; set; }
-            public DateTime EndDate { get; set; }
         }
     }
 }

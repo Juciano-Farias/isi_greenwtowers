@@ -13,7 +13,6 @@ namespace GreenTowers.Models.Domain
 
         [Required]
         public DateTime InitialDate { get; set; }
-        public DateTime EndDate { get; set; }
         [Required]
         [StringLength(100)]
         public string? Temperature { get; set; }
